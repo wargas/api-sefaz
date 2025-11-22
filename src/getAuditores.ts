@@ -29,9 +29,11 @@ export async function getAuditores(ano: string | number, mes: string | number) {
 
         cols.forEach((c:any, i) => {
             const colName= String(c.colName).substring(2);
-            if(colName == 'link') return;
+            if(['link', 'instituicao'].includes(colName)) return;
             obj[colName] = item[i]
         })
+
+        obj['competencia'] = `${ano}-${String(mes).padStart(2, '0')}`
 
         return obj;
     })
