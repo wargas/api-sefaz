@@ -26,6 +26,8 @@ export async function getAuditores(ano: string | number, mes: string | number) {
 
     const result = (get(data, 'resultset') as []).map((item: any[]) => {
         const obj: any = {}
+        
+        obj['competencia'] = `${ano}-${String(mes).padStart(2, '0')}`
 
         cols.forEach((c:any, i) => {
             const colName= String(c.colName).substring(2);
@@ -33,7 +35,6 @@ export async function getAuditores(ano: string | number, mes: string | number) {
             obj[colName] = item[i]
         })
 
-        obj['competencia'] = `${ano}-${String(mes).padStart(2, '0')}`
 
         return obj;
     })
